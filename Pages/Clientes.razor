@@ -1,0 +1,66 @@
+@page "/clientes"
+
+<PageTitle>Clientes</PageTitle>
+
+<CabecalhoPagina Titulo="Clientes" Subtitulo="Gestão dos clientes da plataforma.">
+    <Acoes>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add">
+            Novo Cliente
+        </MudButton>
+    </Acoes>
+</CabecalhoPagina>
+
+<MudGrid>
+    <MudItem xs="12" sm="6" md="4">
+        <DashboardCard Titulo="Total de clientes" Subtitulo="Base ativa">
+            <MudText Typo="Typo.h4">1.842</MudText>
+        </DashboardCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="4">
+        <DashboardCard Titulo="Novos clientes" Subtitulo="Últimos 30 dias">
+            <MudText Typo="Typo.h4">384</MudText>
+        </DashboardCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="4">
+        <DashboardCard Titulo="Empresas" Subtitulo="Maior segmento">
+            <MudText Typo="Typo.h4">42%</MudText>
+        </DashboardCard>
+    </MudItem>
+
+    <MudItem xs="12">
+        <DashboardCard Titulo="Clientes recentes" Subtitulo="Últimos cadastros">
+            <Menu>
+                <MudMenuItem>Exportar</MudMenuItem>
+                <MudMenuItem>Ver todos</MudMenuItem>
+            </Menu>
+            <ChildContent>
+                <MudTable Items="_clientes" Hover="true" Elevation="0">
+                    <HeaderContent>
+                        <MudTh>Nome</MudTh>
+                        <MudTh>Segmento</MudTh>
+                        <MudTh>Cadastro</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd>@context.Nome</MudTd>
+                        <MudTd>@context.Segmento</MudTd>
+                        <MudTd>@context.Cadastro</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </ChildContent>
+        </DashboardCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private record Cliente(string Nome, string Segmento, string Cadastro);
+
+    private readonly List<Cliente> _clientes = new()
+    {
+        new("Clínica Vida", "Empresas", "há 2 dias"),
+        new("TechMed Ltda", "Startup", "há 4 dias"),
+        new("Instituto Saúde+", "Business", "há 1 semana"),
+    };
+}
